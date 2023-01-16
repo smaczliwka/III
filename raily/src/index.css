@@ -1,5 +1,26 @@
+* {
+  box-sizing:border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Helvetica, sans-serif;
+}
 
 .search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-direction: column;
+  gap: 2em;
+  background-color: #add8e6;
+  width:max-content;
   padding: 20px;
-  justify-content: space-evenly;
+  height: 100vh;
+  overflow: scroll;
+}
+
+.search-button {
+  width: 100%;
 }

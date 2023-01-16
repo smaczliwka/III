@@ -19,6 +19,7 @@ import {
     HStack,
     FormLabel,
     Flex,
+    Spacer,
 } from '@chakra-ui/react'
 
 
@@ -65,7 +66,18 @@ class SearchBar extends React.Component {
 
     render() {
         return(
-            <Flex className='search-bar'>
+            <Box className='search-bar'>
+
+            <Box>
+                <Button
+                    size="lg"
+                    onClick={() => this.sendRequest()}
+                    className='search-button'
+                >
+                    Szukaj
+                </Button>
+            </Box>
+
             <Box>
             <FormLabel>Z</FormLabel>
             <Select
@@ -76,9 +88,9 @@ class SearchBar extends React.Component {
                 <option>Warszawa Centralna</option>
                 <option>Kraków Główny</option>
             </Select>
-            {/* </Box>
+            </Box>
 
-            <Box> */}
+            <Box>
             <FormLabel>Do</FormLabel>
             <Select
                 placeholder='Stacja końcowa'
@@ -102,8 +114,8 @@ class SearchBar extends React.Component {
                 <Radio value='2'>2</Radio>
                 </HStack>
             </RadioGroup>
-            {/* </Box>
-            <Box> */}
+            </Box>
+            <Box>
             <FormLabel>Maksymalna liczba zmian miejsc</FormLabel>
             <NumberInput
                 min={0}
@@ -139,16 +151,9 @@ class SearchBar extends React.Component {
                 <NumberDecrementStepper />
                 </NumberInputStepper>
             </NumberInput>
-
-            <Button
-                size="lg"
-                onClick={() => this.sendRequest()}
-            >
-                Szukaj
-            </Button>
             </Box>
             
-            </Flex>
+            </Box>
         )
     }
 }
