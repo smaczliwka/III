@@ -23,6 +23,6 @@ CREATE TABLE miejsce (
     wolne_do INTEGER
 );
 
-\COPY stacja FROM 'data/stacja.csv' (FORMAT csv)
-\COPY przejazd FROM 'data/przejazd.csv' (FORMAT csv)
-\COPY miejsce FROM 'data/miejsce.csv' (FORMAT csv)
+\COPY stacja FROM '/stacja.csv' (FORMAT csv)
+\COPY przejazd FROM '/przejazd.csv' (FORMAT csv)
+\COPY miejsce FROM '/miejsce.csv' (FORMAT csv)

@@ -1,0 +1,3 @@
+FROM ubuntu:latest
+
+COPY ./raily ./raily

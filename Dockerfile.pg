@@ -1,0 +1,6 @@
+FROM postgres:latest
+
+ARG PG_DEV_VERSION=14
+
+COPY ./data/*.csv ./
+COPY db.sql /docker-entrypoint-initdb.d/
