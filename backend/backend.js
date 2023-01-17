@@ -7,11 +7,11 @@ const port = 4000;
 
 const { Client } = require('pg');
 const client = new Client({
-    host: 'localhost',
-    port: 5432,
-    user: 'postgres',
-    password: 'postgres',
-    database: 'raily'
+  host: '172.17.0.1',
+  port: 5432,
+  user: 'postgres',
+  password: 'postgres',
+  database: 'raily'
 });
 client.connect();
 
