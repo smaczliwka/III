@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require("body-parser");
+const cors = require('cors');
 const router = express.Router();
 const app = express();
 const port = 4000;
@@ -14,6 +15,7 @@ const client = new Client({
 });
 client.connect();
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
