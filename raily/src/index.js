@@ -19,104 +19,87 @@ import {
     HStack,
     FormLabel,
     Flex,
-    Stack,
     Center,
 } from '@chakra-ui/react'
 
 
 class SearchBar extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            from: null,
-            to: null,
-            changes: '0',
-            class: '2',
-            date: null,
-            hour: '12',
-        };
-    }
-
-    handleChange(event) {
-        console.log(event);
-        const name = event.target.name;
-        const value = event.target.value;
-        this.setState({
-            [name]: value,
-        });
-        console.log(this.state);
-    }
-
-    handleValue(name, value) {
-        console.log(value);
-        this.setState({
-            [name]: value,
-        });
-        console.log(this.state);
-    }
-
-    validateForm() {
-        if (!this.state.from) alert('Proszę uzupełnić stację początkową');
-        else if (!this.state.to) alert('Proszę uzupełnić stację końcową');
-        else if (this.state.from === this.state.to) alert("Stacja początkowa i końcowa muszą się różnić");
-        else if (!this.state.date) alert("Proszę wybrać datę przejazdu")
-        else return true;
-        return false;
-    }
-
-    sendRequest() {
-        console.log(JSON.stringify(this.state));
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(this.state),
-          }
-        console.log(requestOptions)
-        fetch('http://localhost:4000/', requestOptions)
-        .then(res => res.json())
-        .then(res => console.log(res));
-    }
-
-    handleForm() {
-        if (this.validateForm()) {
-            this.sendRequest();
-        }
-    }
-
     render() {
         return(
             <Box className='search-bar'>
 
-            <Box>
+            <Box className='form'>
             <FormLabel>Z</FormLabel>
             <Select
                 placeholder='Stacja początkowa'
                 name='from'
-                onChange={(event) => this.handleChange(event)}
+                onChange={(event) => this.props.handleChange(event)}
             >
+                <option>Gdańsk Główny</option>
+                <option>Tczew</option>
+                <option>Malbork</option>
+                <option>Prabuty</option>
+                <option>Susz</option>
+                <option>Iława Główna</option>
+                <option>Działdowo</option>
+                <option>Mława</option>
+                <option>Ciechanów</option>
+                <option>Nowy Dwór Mazowiecki</option>
+                <option>Legionowo</option>
+                <option>Warszawa Wschodnia</option>
                 <option>Warszawa Centralna</option>
+                <option>Warszawa Zachodnia</option>
+                <option>Grodzisk Mazowiecki</option>
+                <option>Żyrardów</option>
+                <option>Skierniewice</option>
+                <option>Koluszki</option>
+                <option>Tomaszów Mazowiecki</option>
+                <option>Opoczno Południe</option>
+                <option>Włoszczowa Północ</option>
+                <option>Miechów</option>
                 <option>Kraków Główny</option>
             </Select>
             </Box>
 
-            <Box>
+            <Box className='form'>
             <FormLabel>Do</FormLabel>
             <Select
                 placeholder='Stacja końcowa'
                 name='to'
-                onChange={(event) => this.handleChange(event)}
+                onChange={(event) => this.props.handleChange(event)}
             >
+                <option>Gdańsk Główny</option>
+                <option>Tczew</option>
+                <option>Malbork</option>
+                <option>Prabuty</option>
+                <option>Susz</option>
+                <option>Iława Główna</option>
+                <option>Działdowo</option>
+                <option>Mława</option>
+                <option>Ciechanów</option>
+                <option>Nowy Dwór Mazowiecki</option>
+                <option>Legionowo</option>
+                <option>Warszawa Wschodnia</option>
                 <option>Warszawa Centralna</option>
+                <option>Warszawa Zachodnia</option>
+                <option>Grodzisk Mazowiecki</option>
+                <option>Żyrardów</option>
+                <option>Skierniewice</option>
+                <option>Koluszki</option>
+                <option>Tomaszów Mazowiecki</option>
+                <option>Opoczno Południe</option>
+                <option>Włoszczowa Północ</option>
+                <option>Miechów</option>
                 <option>Kraków Główny</option>
             </Select>
             </Box>
 
-            <Box>
+            <Box className='form'>
             <FormLabel>Klasa</FormLabel>
             <RadioGroup
                 defaultValue='2'
                 name='class'
-                onChange={(event) => this.handleValue('class', event)}
+                onChange={(event) => this.props.handleValue('class', event)}
             >
                 <HStack spacing='24px'>
                 <Radio value='1'>1</Radio>
@@ -124,13 +107,14 @@ class SearchBar extends React.Component {
                 </HStack>
             </RadioGroup>
             </Box>
-            <Box>
+
+            <Box className='form'>
             <FormLabel>Maksymalna liczba zmian miejsc</FormLabel>
             <NumberInput
                 min={0}
                 max={3}
                 defaultValue={0}
-                onChange={(event) => this.handleValue("changes", event)}
+                onChange={(event) => this.props.handleValue("changes", event)}
             >
                 <NumberInputField />
                 <NumberInputStepper>
@@ -139,20 +123,22 @@ class SearchBar extends React.Component {
                 </NumberInputStepper>
             </NumberInput>
             </Box>
-            <Box>
+
+            <Box className='form'>
             <DatePicker
                 name='date'
                 size='sm'
-                onChange={(event) => this.handleValue('date', event)}
+                onChange={(event) => this.props.handleValue("date", event)}
             />
             </Box>
-            <Box>
+
+            <Box className='form'>
             <FormLabel>Godzina odjazdu</FormLabel>
             <NumberInput
                 min={0}
                 max={23}
                 defaultValue={12}
-                onChange={(event) => this.handleValue("hour", event)}
+                onChange={(event) => this.props.handleValue("hour", event)}
             >
                 <NumberInputField />
                 <NumberInputStepper>
@@ -162,10 +148,10 @@ class SearchBar extends React.Component {
             </NumberInput>
             </Box>
             
-            <Box>
+            <Box className='form'>
                 <Button
                     size="lg"
-                    onClick={() => this.handleForm()}
+                    onClick={() => this.props.handleForm()}
                     className='search-button'
                 >
                     Szukaj
@@ -182,13 +168,15 @@ class Connection extends React.Component {
         alert('Ta funkcja nie jest jeszcze dostępna');
     }
     render() {
-        // const listStations = this.props.stations.map((station) =>  <li>{station}</li>);
+        const depDate = new Date(Date.parse(this.props.depTime));
+        const arrDate = new Date(Date.parse(this.props.arrTime));
         return(
-            <Flex as='button' borderRadius='md' className='connection'>
-                <Stack direction={['column', 'row']} spacing='24px' className='station-list'>
-                {this.props.stations.map((station) => <Center className='station'>{station}</Center>)} 
-                </Stack>
-                <Center>{this.props.price} zł</Center>
+            <Flex borderRadius='md' className='connection'>
+                <Flex direction={['column', 'row']} spacing='24px' className='station-list'>
+                {this.props.stations.map((station, index) => <Center className='station' key={index}>{station}</Center>)} 
+                </Flex>
+                <Center>Odjazd: {depDate.toLocaleString('pl-PL')}</Center>
+                <Center>Przyjazd: {arrDate.toLocaleString('pl-PL')}</Center>
                 <Button bg='green' onClick={() => this.buyTicket()}>Kup bilet</Button>
             </Flex>
         )
@@ -199,7 +187,13 @@ class Connections extends React.Component {
     render() {
         return(
             <Box className='connection-list'>
-                {this.props.info.map((info) => <Connection stations={info.stations} price={info.price}></Connection>)}
+                {this.props.info.map((info, index) =>
+                    <Connection
+                        stations={info.stations}
+                        depTime={info.depTime}
+                        arrTime={info.arrTime}
+                        key={index}
+                    />)}
             </Box>
         )
 
@@ -207,27 +201,78 @@ class Connections extends React.Component {
 }
 
 class App extends React.Component {
-    // 2. Wrap ChakraProvider at the root of your app
-    render() {
-        const info = [
-            {
-            stations: ['Warszawa Centralna', 'Opoczno Południe', 'Miechów', 'Kraków Główny'],
-            price: 57.98
+    constructor(props) {
+        super(props);
+        this.state = {
+            form: {
+                from: null,
+                to: null,
+                changes: '0',
+                class: '2',
+                date: null,
+                hour: '12',
             },
-            {
-            stations: ['Warszawa Centralna', 'Włoszczowa Północ', 'Kraków Główny'],
-            price: 48.65
-            },
-            {
-            stations: ['Warszawa Centralna', 'Kraków Główny'],
-            price: 37.95
+            connections: [],
+        };
+    }
+
+    handleChange(event) {
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState({
+            form: {
+                ...this.state.form,
+                [name]: value,
             }
-        ]
+        });
+    }
+
+    handleValue(name, value) {
+        this.setState({
+            form: {
+                ...this.state.form,
+                [name]: value,
+            }
+        });
+        console.log(this.state);
+    }
+
+    validateForm() {
+        if (!this.state.form.from) alert('Proszę uzupełnić stację początkową');
+        else if (!this.state.form.to) alert('Proszę uzupełnić stację końcową');
+        else if (this.state.form.from === this.state.form.to) alert("Stacja początkowa i końcowa muszą się różnić");
+        else if (!this.state.form.date) alert("Proszę wybrać datę przejazdu")
+        else return true;
+        return false;
+    }
+
+    sendRequest() {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(this.state.form),
+          }
+        fetch('http://localhost:4000/', requestOptions)
+        .then(res => res.json())
+        .then(res => this.setState({connections: res}));
+    }
+
+    handleForm() {
+        if (this.validateForm()) {
+            this.sendRequest();
+        }
+    }
+
+    render() {
         return (
             <ChakraProvider>
             <Flex>
-                <SearchBar />
-                <Connections info={info}></Connections>
+                <SearchBar
+                    handleChange={(event) => this.handleChange(event)}
+                    handleValue={(name, value) => this.handleValue(name, value)}
+                    handleForm={() => this.handleForm()}
+                />
+                <Connections info={this.state.connections}></Connections>
             </Flex>
             </ChakraProvider>
         )        
