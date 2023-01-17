@@ -103,11 +103,28 @@ router.post('/', (req, res) => {
         10`;
   const params = [body.from, body.to, body.date, body.hour];
   client.query(text, params, (err, dbres) => {
-    console.log(dbres.rows);
-    if (dbres.rows.length > 0)
-      res.send({ stations: [dbres.rows[0].a, dbres.rows[0].b] });
-    else
-      res.send({});
+    let response = [];
+    for (let i = 0; i < dbres.rows.length; i++) {
+      let row = dbres.rows[i];
+
+      // Stations
+      let stations = [row.a, row.b];
+      if (row.c != '')
+        stations.push(row.c);
+      if (row.d != '')
+        stations.push(row.d);
+
+      // Departure and arrival time
+      let depTime = row.czas_pocz;
+      let arrTime = row.czas_kon;
+
+      response.push({
+        stations: stations,
+        depTime: depTime,
+        arrTime: arrTime
+      });
+    }
+    res.send(response);
   });
 })
 
