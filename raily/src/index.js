@@ -72,7 +72,9 @@ class SearchBar extends React.Component {
             body: JSON.stringify(this.state),
           }
         console.log(requestOptions)
-        fetch('/', requestOptions);
+        fetch('http://localhost:4000/', requestOptions)
+        .then(res => res.json())
+        .then(res => console.log(res));
     }
 
     handleForm() {
