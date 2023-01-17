@@ -214,11 +214,9 @@ class App extends React.Component {
             },
             connections: [],
         };
-        console.log(this.state);
     }
 
     handleChange(event) {
-        console.log(event);
         const name = event.target.name;
         const value = event.target.value;
         this.setState({
@@ -227,11 +225,9 @@ class App extends React.Component {
                 [name]: value,
             }
         });
-        console.log(this.state);
     }
 
     handleValue(name, value) {
-        console.log(value);
         this.setState({
             form: {
                 ...this.state.form,
@@ -251,13 +247,11 @@ class App extends React.Component {
     }
 
     sendRequest() {
-        console.log(JSON.stringify(this.state.form));
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(this.state.form),
           }
-        console.log(requestOptions)
         fetch('http://localhost:4000/', requestOptions)
         .then(res => res.json())
         .then(res => this.setState({connections: res}));
